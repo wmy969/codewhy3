@@ -1,28 +1,66 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="content">
+
+          <chatroom :currentUser="currentUser"></chatroom>
+    <userlistcom @chooseuser="toggleuser" :userlist="userlist"></userlistcom>
+    </div>
+
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import chatroom from './components/chatroom.vue'
+import userlistcom from './components/userlistcom'
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    chatroom,userlistcom
+     
+  },
+  data(){
+    return {
+        userlist:[
+          {
+            name:'小明',
+            img:require('./assets/img/01.jpeg')
+          },
+          {
+            name:'小华',
+            img:require('./assets/img/02.jpeg')
+          },
+          {
+            name:'小红',
+            img:require('./assets/img/03.jpeg')
+          },
+          {
+            name:'小光',
+            img:require('./assets/img/04.jpeg')
+          }
+         
+        ],
+        currentUser:{
+            name:'小明',
+            img:require('./assets/img/01.jpeg')
+          }
+        
+    }
+  },
+  methods:{
+    toggleuser(index){
+     this.currentUser=   this.userlist[index]
+    } 
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style scoped>
+.content{
+  display: flex;
+  margin: 0 auto;
+  width: 800px;
+  height: 700px;
 }
 </style>
